@@ -20,14 +20,15 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/products/', include('products.urls')),
     path('auth/accounts/', include('accounts.urls')),
     path('api/cart/', include('cart.urls')),
+    path('api/payments/', include('payments.urls')),
 
 
                   # Make root redirect to product list
     path('', lambda request: redirect('/api/products/')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
