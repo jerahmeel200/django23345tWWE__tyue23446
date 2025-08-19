@@ -26,8 +26,12 @@ SECRET_KEY = 'django-insecure-cgfd-_r$)(296x-i5wect-%y3-zpx%!srb9k(-k_=^%l%1l$iv
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-
+# Always list domains like so for security reasons
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://e-commerce-site-tkao.onrender.com",
+#     "http://127.0.0.1:8000",   # local dev
+#     "http://localhost:8000"
+# ]
 # Or, to allow all hosts (not recommended for production, but useful while testing):
 #
 # ALLOWED_HOSTS = ["*"]
@@ -36,7 +40,7 @@ ALLOWED_HOSTS = [
     "*"
 ]
 
-
+CSRF_TRUSTED_ORIGINS = ['*']
 
 # Application definition
 
