@@ -33,9 +33,7 @@ DEBUG = True
 # ALLOWED_HOSTS = ["*"]
 
 ALLOWED_HOSTS = [
-    "e-commerce-site-tkao.onrender.com",
-    "localhost",
-    "127.0.0.1",
+    "*"
 ]
 
 
