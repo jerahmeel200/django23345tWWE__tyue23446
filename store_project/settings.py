@@ -27,7 +27,17 @@ SECRET_KEY = 'django-insecure-cgfd-_r$)(296x-i5wect-%y3-zpx%!srb9k(-k_=^%l%1l$iv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+# Or, to allow all hosts (not recommended for production, but useful while testing):
+#
+# ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = [
+    "e-commerce-site-tkao.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
+
 
 
 # Application definition
