@@ -4,8 +4,8 @@
 
 <div class="row">
   {% for product in products %}
-  <div class="col-md-4 mb-4">
-    <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden hover-shadow transition ">
+  <div class="col-12 col-md-12 col-lg-4 mb-4">
+    <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden hover-shadow transition">
       <img
         src="{{ product.image.url }}"
         class="card-img-top img-fluid mx-auto d-block"
@@ -30,6 +30,7 @@
   </div>
   {% endfor %}
 </div>
+
 
 <style>
   /* Smooth hover effect */
