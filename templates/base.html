@@ -15,10 +15,10 @@
   <div class="container">
     <a class="navbar-brand" href="{% url 'product_list' %}">Store</a>
 
-    <!-- Navbar items (always visible, no hamburger) -->
+
     <div class="ms-auto d-flex align-items-center gap-2   ">
 
-      <!-- Cart button with badge -->
+
       <a class="btn btn-outline-light position-relative" href="{% url 'view_cart' %}">
         <i class="bi bi-cart"></i>
         {% if cart_item_count > 0 %}
@@ -43,7 +43,7 @@
 <!-- Messages -->
 {% if messages %}
   <div class="container mt-3 d-flex justify-content-center">
-    <div class="w-100 w-md-50"> <!-- Full width on mobile, 50% on md+ -->
+    <div class="w-100 w-md-50">
       {% for message in messages %}
         <div class="alert alert-{{ message.tags }} text-center py-2 px-3" role="alert">
           {{ message }}
