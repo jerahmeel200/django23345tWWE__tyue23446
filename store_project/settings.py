@@ -41,7 +41,7 @@ ALLOWED_HOSTS = [
     "*"
 ]
 
-
+LOGIN_URL = '/auth/accounts/login/'
 
 # Application definition
 
