@@ -10,7 +10,20 @@
       <div class="card-body">
         <form method="POST">
           {% csrf_token %}
-          {{ form.as_p }}
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          <div class="mb-3 position-relative">
+            {{ form.password.label_tag }}
+            <div class="input-group">
+              {{ form.password }}
+              <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                👁
+              </button>
+            </div>
+          </div>
+
           <div class="d-grid">
             <button type="submit" class="btn btn-success">Login</button>
           </div>
@@ -19,4 +32,17 @@
     </div>
   </div>
 </div>
+
+<script>
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordField = document.getElementById('id_password');
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        this.textContent = "🙈";
+    } else {
+        passwordField.type = "password";
+        this.textContent = "👁";
+    }
+});
+</script>
 {% endblock %}

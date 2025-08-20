@@ -10,7 +10,33 @@
       <div class="card-body">
         <form method="POST">
           {% csrf_token %}
-          {{ form.as_p }}
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+          </div>
+          <div class="mb-3 position-relative">
+            {{ form.password1.label_tag }}
+            <div class="input-group">
+              {{ form.password1 }}
+              <button type="button" class="btn btn-outline-secondary" id="togglePassword1">
+                👁
+              </button>
+            </div>
+          </div>
+          <div class="mb-3 position-relative">
+            {{ form.password2.label_tag }}
+            <div class="input-group">
+              {{ form.password2 }}
+              <button type="button" class="btn btn-outline-secondary" id="togglePassword2">
+                👁
+              </button>
+            </div>
+          </div>
+
           <div class="d-grid">
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </div>
@@ -23,4 +49,28 @@
     </div>
   </div>
 </div>
+
+<script>
+document.getElementById('togglePassword1').addEventListener('click', function () {
+    const passwordField = document.getElementById('id_password1');
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        this.textContent = "🙈";
+    } else {
+        passwordField.type = "password";
+        this.textContent = "👁";
+    }
+});
+
+document.getElementById('togglePassword2').addEventListener('click', function () {
+    const passwordField = document.getElementById('id_password2');
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        this.textContent = "🙈";
+    } else {
+        passwordField.type = "password";
+        this.textContent = "👁";
+    }
+});
+</script>
 {% endblock %}
