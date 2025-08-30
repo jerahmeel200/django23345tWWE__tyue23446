@@ -20,12 +20,7 @@
           {% for item in items %}
           <tr>
 
-            <td>       <img
-        src="{{ product.image.url }}"
-        class="card-img-top img-fluid mx-auto d-block"
-        alt="{{ product.name }}"
-        style="height: 20px; width: 20px; object-fit: cover;"
-      />{{ item.product.name }}</td>
+            <td> {{ item.product.name }}</td>
             <td>
               <form method="POST" action="{% url 'update_cart' item.id %}" class="d-flex justify-content-center align-items-center gap-2">
                 {% csrf_token %}
