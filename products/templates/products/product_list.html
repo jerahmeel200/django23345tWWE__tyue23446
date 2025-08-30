@@ -19,7 +19,19 @@
         </p>
         <div class="mt-auto">
           <p class="mb-2 fs-5 fw-semibold text-success">${{ product.price }}</p>
-          <a href="{% url 'product_detail' product.pk %}" class="btn btn-outline-primary w-100">View Details</a>
+
+          <!-- View Button -->
+          <a href="{% url 'product_detail' product.pk %}"
+             class="btn btn-primary w-100 mb-2 fw-semibold shadow-sm">
+             <i class="bi bi-eye"></i> View Details
+          </a>
+
+          <!-- Add to Cart Button (no redirect) -->
+           <button data-url="{% url 'add_to_cart' product.pk %}" class="btn btn-success w-100 fw-semibold shadow-sm add-to-cart-btn">
+
+            <i class="bi bi-cart-plus"></i> Add To Cart
+          </button>
+
         </div>
       </div>
     </div>
@@ -32,19 +44,36 @@
 </div>
 
 
+
 <style>
-  /* Smooth hover effect */
   .hover-shadow:hover {
     transform: translateY(-5px);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease-in-out;
   }
   .transition {
     transition: all 0.3s ease-in-out;
   }
+  .card-bg {
+    background-color: #f8f9fa;
+  }
 
-    .card-bg {
-    background-color:light-gray;
+  /* Button Styling */
+  .btn-primary {
+    background: #007bff;
+    border: none;
+    border-radius: 10px;
+  }
+  .btn-primary:hover {
+    background: #0056b3;
+  }
+
+  .btn-success {
+    background: #28a745;
+    border: none;
+    border-radius: 10px;
+  }
+  .btn-success:hover {
+    background: #218838;
   }
 </style>
 {% endblock %}

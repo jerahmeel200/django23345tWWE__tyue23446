@@ -11,21 +11,16 @@
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="{% url 'product_list' %}">Store</a>
 
-
-    <div class="ms-auto d-flex align-items-center gap-2   ">
-
-
+    <div class="ms-auto d-flex align-items-center gap-2">
       <a class="btn btn-outline-light position-relative" href="{% url 'view_cart' %}">
         <i class="bi bi-cart"></i>
-        {% if cart_item_count > 0 %}
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ cart_item_count }}
-          </span>
-        {% endif %}
+        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{ cart_item_count|default:0 }}
+        </span>
       </a>
 
       <!-- Auth buttons -->
@@ -39,23 +34,25 @@
   </div>
 </nav>
 
+<div id="alert-container" class="position-fixed top-0 start-50 translate-middle-x mt-5"
+     style="z-index:1050; width:90%; max-width:500px;">
+</div>
 
-<!-- Messages -->
-{% if messages %}
-  <div class="container mt-3 d-flex justify-content-center">
-    <div class="w-100 w-md-50">
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} text-center py-2 px-3" role="alert">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-{% endif %}
 
 <!-- Main content -->
-<div class="container">
-    {% block content %}{% endblock %}
+<div class="container mt-5 pt-4">
+  {% if messages %}
+    <div class="container mt-3 d-flex justify-content-center">
+      <div class="w-100 w-md-50">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} text-center py-2 px-3" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+  {% block content %}{% endblock %}
 </div>
 
 <!-- Bootstrap JS -->
@@ -70,6 +67,69 @@
       setTimeout(() => alert.remove(), 500);
     });
   }, 3000);
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cartBtns = document.querySelectorAll(".add-to-cart-btn");
+  const cartBadge = document.querySelector(".navbar .badge");
+
+  cartBtns.forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const url = this.getAttribute("data-url");
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+  if (data.success) {
+    // Update cart count
+    const cartCount = document.getElementById("cart-count");
+    if (cartCount) {
+      cartCount.textContent = data.cart_count;
+      cartCount.style.display = data.cart_count > 0 ? "inline-block" : "none";
+    }
+
+    // Show success alert (overlay under navbar)
+const alertContainer = document.getElementById("alert-container");
+const alert = document.createElement("div");
+alert.className = "alert alert-success text-center py-2 px-3 shadow";
+alert.textContent = data.message;
+alertContainer.appendChild(alert);
+
+setTimeout(() => {
+  alert.style.opacity = "0";
+  setTimeout(() => alert.remove(), 500);
+}, 2500);
+        }
+      })
+      .catch(err => console.error(err));
+    });
+  });
+
+  // CSRF helper
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + "=")) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+});
 </script>
 
 </body>
