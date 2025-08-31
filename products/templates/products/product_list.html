@@ -14,7 +14,7 @@
       />
       <div class="card-body d-flex flex-column card-bg">
         <h5 class="card-title text-primary fw-bold">{{ product.name }}</h5>
-        <p class="card-text text-muted small">
+        <p class="card-text text-muted  fs-5 fs-sm-4 fs-md-3 ">
           {{ product.description|truncatewords:15 }}
         </p>
         <div class="mt-auto">
@@ -22,15 +22,21 @@
 
           <!-- View Button -->
           <a href="{% url 'product_detail' product.pk %}"
-             class="btn btn-primary w-100 mb-2 fw-semibold shadow-sm">
+             class="btn btn-primary w-100 mb-2 fw-semibold shadow-sm  fs-5 fs-sm-4 fs-md-3 
+         py-4 py-md-2">
              <i class="bi bi-eye"></i> View Details
           </a>
 
           <!-- Add to Cart Button (no redirect) -->
-           <button data-url="{% url 'add_to_cart' product.pk %}" class="btn btn-success w-100 fw-semibold shadow-sm add-to-cart-btn">
+  <button 
+  data-url="{% url 'add_to_cart' product.pk %}" 
+  class="btn btn-success w-100 fw-semibold shadow-sm add-to-cart-btn 
+         btn-mobile-big fs-5 fs-sm-4 fs-md-3 
+         py-4 py-md-2">
+  <i class="bi bi-cart-plus"></i> Add To Cart
+</button>
 
-            <i class="bi bi-cart-plus"></i> Add To Cart
-          </button>
+
 
         </div>
       </div>
@@ -46,6 +52,7 @@
 
 
 <style>
+
   .hover-shadow:hover {
     transform: translateY(-5px);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
@@ -75,5 +82,11 @@
   .btn-success:hover {
     background: #218838;
   }
+
+ 
+ 
+
+ 
+
 </style>
 {% endblock %}
