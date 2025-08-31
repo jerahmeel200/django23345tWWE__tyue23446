@@ -2,33 +2,36 @@
 {% block content %}
 <h2 class="text-center my-4">Our Products</h2>
 
-<div id="products" class="row">
+<div class="row">
   {% for product in products %}
   <div class="col-12 col-md-12 col-lg-4 mb-4">
     <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden hover-shadow transition">
       <img
         src="{{ product.image.url }}"
-        class="  img-fluid mx-auto d-block"
+        class="card-img-top img-fluid mx-auto d-block"
         alt="{{ product.name }}"
-        /* remove the inline height to let CSS control it */
+        style="height: 180px; width: auto; object-fit: cover;"
       />
       <div class="card-body d-flex flex-column card-bg">
         <h5 class="card-title text-primary fw-bold">{{ product.name }}</h5>
-        <p class="card-text text-muted">
+        <p class="card-text text-muted small">
           {{ product.description|truncatewords:15 }}
         </p>
         <div class="mt-auto">
-          <p class="mb-2 fs-5 fw-semibold text-success price">${{ product.price }}</p>
+          <p class="mb-2 fs-5 fw-semibold text-success">${{ product.price }}</p>
 
+          <!-- View Button -->
           <a href="{% url 'product_detail' product.pk %}"
              class="btn btn-primary w-100 mb-2 fw-semibold shadow-sm">
              <i class="bi bi-eye"></i> View Details
           </a>
 
-          <button data-url="{% url 'add_to_cart' product.pk %}"
-                  class="btn btn-success w-100 fw-semibold shadow-sm add-to-cart-btn">
+          <!-- Add to Cart Button (no redirect) -->
+           <button data-url="{% url 'add_to_cart' product.pk %}" class="btn btn-success w-100 fw-semibold shadow-sm add-to-cart-btn">
+
             <i class="bi bi-cart-plus"></i> Add To Cart
           </button>
+
         </div>
       </div>
     </div>
@@ -40,48 +43,37 @@
   {% endfor %}
 </div>
 
+
+
 <style>
-  .hover-shadow:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
-  .transition { transition: all .3s ease-in-out; }
-  .card-bg { background-color: #f8f9fa; }
-  .btn-primary { background:#007bff; border:none; border-radius:10px; }
-  .btn-primary:hover { background:#0056b3; }
-  .btn-success { background:#28a745; border:none; border-radius:10px; }
-  .btn-success:hover { background:#218838; }
-
-
-/* 🔥 Mobile-only styles */
-@media (max-width: 576px) {
-  /* Make product image taller */
-  .card-img-top {
-<!--    height: 240px !important;-->
-<!--    object-fit: cover !important;-->
+  .hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  .transition {
+    transition: all 0.3s ease-in-out;
+  }
+  .card-bg {
+    background-color: #f8f9fa;
   }
 
-  /* Scale up text */
-  .card-title {
-    font-size: 1.25rem !important;  /* bigger product title */
+  /* Button Styling */
+  .btn-primary {
+    background: #007bff;
+    border: none;
+    border-radius: 10px;
   }
-  .card-text {
-    font-size: 1.05rem !important;  /* bigger description */
-  }
-  .card .price,
-  .card .fs-5 {
-    font-size: 1.25rem !important;  /* bigger price */
+  .btn-primary:hover {
+    background: #0056b3;
   }
 
-  /* Bigger buttons for touch screens */
-  .card .btn {
-    font-size: 1.1rem !important;
-    padding: 14px !important;
-    border-radius: 12px !important;
+  .btn-success {
+    background: #28a745;
+    border: none;
+    border-radius: 10px;
   }
-
-  /* Slightly more padding inside card */
-  .card-body {
-    padding: 1.25rem !important;
+  .btn-success:hover {
+    background: #218838;
   }
-}
-
 </style>
 {% endblock %}
